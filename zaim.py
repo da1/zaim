@@ -2,19 +2,15 @@
 import codecs
 import csv
 from datetime import datetime
+from zaim.zaim import Zaim
 
 import sys
-import requests
-import oauth2
-import urlparse
-import json
-from urllib import urlencode
 import time
 
-consumer_key        = u""
-consumer_secret     = u""
-access_token        = u""
-access_token_secret = u""
+consumer_key        = u"e2c3b44883366ddc8c442668e1b0a728115953c7"
+consumer_secret     = u"bf901548c5cdc45dfde0cb9d7c94ebd47a8291f4"
+access_token        = u"bHAnqo7nmcRwjqNG9ANEZL0ViTLtN2yn1sUm6RXaLvIOuGSyIlAmJodHBMkzbghW7UYVU3K8"
+access_token_secret = u"IoNqBbqp0IHG3ogtRObeGmRFYOjpjxP5SpE9devZuagKUR7X8idMAIt6wJpjWpqm1p9rdksGSg"
 
 money_bug = 3866790 # おさいふ
 
@@ -46,62 +42,6 @@ def conv2category(data):
 
 def date_now():
     return datetime.now().strftime("%Y-%m-%d")
-
-def verify():
-    return get(u"https://api.zaim.net/v2/home/user/verify")
-
-def getClient():
-    token = oauth2.Token(key=access_token, secret=access_token_secret)
-    consumer = oauth2.Consumer(key=consumer_key, secret=consumer_secret)
-    return oauth2.Client(consumer, token)
-
-def access(method, url, params=""):
-    client = getClient()
-    resp, content = client.request(url, method=method, body=urlencode(params))
-    return json.loads(content)
-
-def post(url, params):
-    return access('POST', url, params)
-
-def get(url):
-    return access('GET', url)
-
-def money():
-    return get(u"https://api.zaim.net/v2/home/money")
-
-def payment(category_id, genre_id, amount, date, comment):
-    params = {
-            'category_id'     : category_id,
-            'genre_id'        : genre_id,
-            'amount'          : amount,
-            'comment'         : comment,
-            'date'            : date,
-            'from_account_id' : money_bug,
-            #'receipt_id'      : receipt_id,
-        }
-    return post(u"https://api.zaim.net/v2/home/money/payment", params)
-
-def income(category_id, amount, date, comment):
-    params = {
-            'category_id'   : category_id,
-            'amount'        : amount,
-            'date'          : date,
-            'to_account_id' : money_bug,
-            'comment'       : comment,
-        }
-    return post(u"https://api.zaim.net/v2/home/money/income", params)
-
-def account():
-    return get(u"https://api.zaim.net/v2/home/account")
-
-def category():
-    return get(u"https://api.zaim.net/v2/home/category")
-
-def genre():
-    return get(u"https://api.zaim.net/v2/home/genre")
-
-def money():
-    return get(u"https://api.zaim.net/v2/home/money")
 
 def remQuote(text):
     return text[1:-1]
@@ -145,7 +85,9 @@ def mover():
             count+=1
 
 def readToCSV():
-    result = money()
+    zaimApi = Zaim()
+
+    result = zaimApi.money()
     moneyPerDay = {};
     for m in filter(lambda x:x['mode']=='payment',result['money']):
         date = m['date']
