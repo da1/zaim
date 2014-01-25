@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+    .bars rect {
+        fill: steelblue;
+    }
+
+    .axis text {
+        font: 10px sans-serif;
+    }
+
+    .axis path, .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+</style>
+<body>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://localhost:8000/histogram-chart.js"></script>
+    <script>
+
+        d3.csv("dji.csv", function(error, csv) {
+            d3.select("body")
+            .datum(readCSV(csv))
+            .call(histogramChart()
+            .bins(d3.scale.linear().ticks(20))
+            .tickFormat(d3.format("d")));
+        });
+
+        function readCSV(csv) {
+            var r = 500;
+            var distribution = [];
+            for(var i=1; i < csv.length; i++) {
+                var data = csv[i];
+                var v = Math.floor(data.Amount / r);
+                distribution.push(v * r);
+            }
+            return distribution;
+        }
+
+        function irwinHallDistribution(n, m) {
+            var distribution = [];
+            for (var i = 0; i < n; i++) {
+                for (var s = 0, j = 0; j < m; j++) {
+                    s += Math.random();
+                }
+                distribution.push(s / m);
+            }
+            return distribution;
+        }
+
+    </script>
+</body>
