@@ -7,11 +7,6 @@ from zaim.zaim import Zaim
 import sys
 import time
 
-consumer_key        = u"e2c3b44883366ddc8c442668e1b0a728115953c7"
-consumer_secret     = u"bf901548c5cdc45dfde0cb9d7c94ebd47a8291f4"
-access_token        = u"bHAnqo7nmcRwjqNG9ANEZL0ViTLtN2yn1sUm6RXaLvIOuGSyIlAmJodHBMkzbghW7UYVU3K8"
-access_token_secret = u"IoNqBbqp0IHG3ogtRObeGmRFYOjpjxP5SpE9devZuagKUR7X8idMAIt6wJpjWpqm1p9rdksGSg"
-
 money_bug = 3866790 # おさいふ
 
 def conv2genre(data):
