@@ -1,9 +1,11 @@
 from zaim.zaim import Zaim
 
+def paymentFilter(money):
+    return filter(lambda x:x['mode']=='payment',money)
+
 def convertPaymentPerDay(money):
     paymentPerDay = {};
-    payments = filter(lambda x:x['mode']=='payment',money['money'])
-    for p in payments:
+    for p in paymentFileter(money['money']):
         date = p['date']
         amount = p['amount']
         if paymentPerDay.has_key(date):
