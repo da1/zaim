@@ -27,7 +27,7 @@ body {
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 2500 - margin.left - margin.right,
+    width = 1000 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
 var x0 = d3.scale.ordinal()
@@ -69,10 +69,10 @@ d3.csv("data.csv", function(error, data) {
   x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
   y.domain([0, d3.max(data, function(d) { return d3.max(d.ages, function(d) { return d.value; }); })]);
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+//  svg.append("g")
+//      .attr("class", "x axis")
+//      .attr("transform", "translate(0," + height + ")")
+//      .call(xAxis);
 
   svg.append("g")
       .attr("class", "y axis")

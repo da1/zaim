@@ -5,7 +5,7 @@ def paymentFilter(money):
 
 def convertPaymentPerDay(money):
     paymentPerDay = {};
-    for p in paymentFileter(money['money']):
+    for p in paymentFilter(money['money']):
         date = p['date']
         amount = p['amount']
         if paymentPerDay.has_key(date):

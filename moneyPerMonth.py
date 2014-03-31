@@ -37,7 +37,6 @@ if __name__ == '__main__':
 
     perMonthArray = toArray(perMonth)
     perMonthArray.sort(key=operator.attrgetter('date'))
-    perMonthArray.reverse()
 
     print "date,payment,income"
     for entity in perMonthArray:
