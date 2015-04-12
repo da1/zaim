@@ -10,7 +10,7 @@ var format = d3.time.format("%Y-%m-%d");
 var color = d3.scale.linear().domain([0, 10000]).range([0, 1.0]);
 
     var svg = d3.select("body").selectAll("svg")
-    .data(d3.range(2010, 2015))
+    .data(d3.range(2010, 2016))
     .enter().append("svg")
     .attr("width", width)
     .attr("height", height)

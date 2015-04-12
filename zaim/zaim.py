@@ -33,7 +33,7 @@ class Zaim:
         return self.get(u"https://api.zaim.net/v2/home/user/verify")
 
     def money(self):
-        return self.get(u"https://api.zaim.net/v2/home/money")
+        return self.get(u"https://api.zaim.net/v2/home/money?start_date=2012-04-01&end_date=2015-03-31")
 
     def account():
         return get(u"https://api.zaim.net/v2/home/account")
